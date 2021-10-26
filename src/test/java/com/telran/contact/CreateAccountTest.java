@@ -24,11 +24,11 @@ public class CreateAccountTest extends TestBase {
         //fill registration form
         driver.findElement(By.cssSelector("[placeholder='Email']")).click();
         driver.findElement(By.cssSelector("[placeholder='Email']")).clear();
-        driver.findElement(By.cssSelector("[placeholder='Email']")).sendKeys("arttashos@gm.com");
+        driver.findElement(By.cssSelector("[placeholder='Email']")).sendKeys("darttashos@gm.com");
 
         driver.findElement(By.cssSelector("[placeholder='Password']")).click();
         driver.findElement(By.cssSelector("[placeholder='Password']")).clear();
-        driver.findElement(By.cssSelector("[placeholder='Password']")).sendKeys("aggHos12345~");
+        driver.findElement(By.cssSelector("[placeholder='Password']")).sendKeys("daggHos12345~");
         //click on Registration button
         driver.findElement(By.xpath("//button[contains(.,'Registration')]")).click();
         //check Logout button displayed
