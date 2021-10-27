@@ -1,9 +1,10 @@
 package com.telran.contact;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -54,19 +55,72 @@ public class TestBase {
         //fill registration form
         driver.findElement(By.cssSelector("[placeholder='Email']")).click();
         driver.findElement(By.cssSelector("[placeholder='Email']")).clear();
-        driver.findElement(By.cssSelector("[placeholder='Email']")).sendKeys("12dartashos@gm.com");
+        driver.findElement(By.cssSelector("[placeholder='Email']")).sendKeys("kronos@gm.com");
 
         driver.findElement(By.cssSelector("[placeholder='Password']")).click();
         driver.findElement(By.cssSelector("[placeholder='Password']")).clear();
-        driver.findElement(By.cssSelector("[placeholder='Password']")).sendKeys("12dagHos12345~");
+        driver.findElement(By.cssSelector("[placeholder='Password']")).sendKeys("Kronos12345~");
         //click on Registration button
         driver.findElement(By.xpath("//button[contains(.,'Registration')]")).click();
         //check Logout button displayed
         Assert.assertTrue(isElementPresent(By.xpath("//button[contains(.,'Sign Out')]")));
     }
 
+
     @AfterMethod(enabled = false)
     public void tearDown() {
         driver.quit();
+    }
+
+    public void click(By locator) {
+        driver.findElement(locator).click();
+    }
+
+    public void type(By locator, String text) {
+        click(locator);
+        driver.findElement(locator).clear();
+        driver.findElement(locator).sendKeys(text);
+    }
+
+    public boolean isLoginTabPresent() {
+        return isElementPresent(By.xpath("//a[contains(.,'LOGIN')]"));
+    }
+
+    public boolean isSignOutTabPresent() {
+        return isElementPresent(By.xpath("//button[contains(.,'Sign Out')]"));
+    }
+
+    public boolean isLoginRegistrationFormPresent() {
+        return isElementPresent(By.cssSelector(".login_login__3EHKB"));
+    }
+
+    public boolean isAlertPresent() {
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(20)).until(ExpectedConditions.alertIsPresent());
+        if (alert == null) {
+            return false;
+        } else {
+            driver.switchTo().alert();
+            alert.accept();
+            return true;
+        }
+    }
+
+    protected void clickWithActions(By save) {
+        Actions action = new Actions(driver);
+        WebElement element = driver.findElement(save);
+        action.moveToElement(element).build().perform();
+        element.click();
+    }
+
+    public void jump() {
+        driver.findElement(By.cssSelector(".add_form__2rsm2 button")).sendKeys(Keys.CONTROL, Keys.END);
+    }
+
+    public void pause(int millis) {
+        new WebDriverWait(driver, Duration.ofSeconds(millis));
+    }
+
+    public boolean thereAreNoMoreContacts() {
+        return isElementPresent(By.cssSelector(".contact-page_message__2qafk"));
     }
 }

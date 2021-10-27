@@ -6,34 +6,29 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CreateAccountTest extends TestBase {
+
     //preconditions: user should be logged out
     @BeforeMethod
     public void ensurePreconditions() {
         //login not present
-        if (!isElementPresent(By.xpath("//a[contains(.,'LOGIN')]"))) {
+        if (!isLoginTabPresent()) {
             //click on logout button
-            driver.findElement(By.xpath("//button[contains(.,'Sign Out')]")).click();
+            click(By.xpath("//button[contains(.,'Sign Out')]"));
         }
     }
 
     @Test
     public void registrationPositiveTest() {
         //click on Login
-        driver.findElement(By.xpath("//a[contains(.,'LOGIN')]")).click();
-        Assert.assertTrue(isElementPresent(By.cssSelector(".login_login__3EHKB")));
+        click(By.xpath("//a[contains(.,'LOGIN')]"));
+        Assert.assertTrue(isLoginRegistrationFormPresent());
         //fill registration form
-        driver.findElement(By.cssSelector("[placeholder='Email']")).click();
-        driver.findElement(By.cssSelector("[placeholder='Email']")).clear();
-        driver.findElement(By.cssSelector("[placeholder='Email']")).sendKeys("darttashos@gm.com");
-
-        driver.findElement(By.cssSelector("[placeholder='Password']")).click();
-        driver.findElement(By.cssSelector("[placeholder='Password']")).clear();
-        driver.findElement(By.cssSelector("[placeholder='Password']")).sendKeys("daggHos12345~");
+        type(By.cssSelector("[placeholder='Email']"), "kroos@gm.com");
+        type(By.cssSelector("[placeholder='Password']"), "Kroos12345~");
         //click on Registration button
-        driver.findElement(By.xpath("//button[contains(.,'Registration')]")).click();
+        click(By.xpath("//button[contains(.,'Registration')]"));
         //check Logout button displayed
-        Assert.assertTrue(isElementPresent(By.xpath("//button[contains(.,'Sign Out')]")));
-
+        Assert.assertTrue(isSignOutTabPresent());
     }
 
 }
