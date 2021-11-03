@@ -17,7 +17,7 @@ public class CreateAccountTest extends TestBase {
         }
     }
 
-    @Test(enabled = false)
+    @Test()
     public void registrationPositiveTest() {
         //click on Login
         app.getUser().clickOnLoginTab();
@@ -41,4 +41,5 @@ public class CreateAccountTest extends TestBase {
         //check Logout button displayed
         Assert.assertTrue(app.getUser().isAlertPresent());
     }
+
 }
