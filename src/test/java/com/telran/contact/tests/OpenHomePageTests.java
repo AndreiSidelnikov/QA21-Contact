@@ -3,7 +3,7 @@ package com.telran.contact.tests;
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
-public class OpenHomePageTests extends TestBase {
+public class OpenHomePageTests extends TestBase{
 
     @Test
     public void homePageTest() throws InterruptedException {
