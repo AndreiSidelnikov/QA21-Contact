@@ -1,9 +1,0 @@
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-
-<suite name="HomePage" verbose="1" >
-    <test name="HomePage">
-        <classes>
-            <class name="com.telran.contact.tests.OpenHomePageTest"/>
-        </classes>
-    </test>
-</suite>
